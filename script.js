@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}`;
 
         let card = document.createElement("div");
-        card.className = "card position-relative";
+        card.className = "card position-relative col-2";
         card.style =
           "background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); text-align: center; align-items:center; box-shadow: 2px 2px 2px 2px purple; width: 24em; height: 35em; margin: 1em;";
 
