@@ -21,11 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let card = document.createElement("div");
         card.className = "card position-relative col-2";
         card.style =
-          "background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); text-align: center; align-items:center; box-shadow: 2px 2px 2px 2px purple; width: 24em; height: 35em; margin: 1em;";
+          "background-color: #FF3CAC;background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%); text-align: center; align-items:center; box-shadow: 2px 2px 2px 2px purple; width: 24em; height: 35em; margin: 1em; font-size: 1rem; font-weight:500;";
 
         card.innerHTML = `
           <h4 class='card-header'>${country.name.common}</h4>
-          <div style='justify-content: center'>
+          <div style='justify-content: center; margin-bottom:10px;'>
             <img src='${flagurl}' alt='country' style="height: 165px" width='300' />
           </div>
           <p>Capital: ${country.capital}</p>
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div id='weather-${countryCode}'></div>
           
 
-          <button class='bg-success btn position-absolute' id="weatherButton-${countryCode}" style="bottom:50px; text-align: center; width: 12em" onclick='displayWeather("${country.name.common}", "${country.capital}", ${lat}, ${lon}, "${countryCode}")'; type='button'>
+          <button class='bg-success btn position-absolute' id="weatherButton-${countryCode}" style="bottom:35px; text-align: center; width: 12em" onclick='displayWeather("${country.name.common}", "${country.capital}", ${lat}, ${lon}, "${countryCode}")'; type='button'>
             Click to see weather
           </button>
       
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function displayWeather(countryName, capital, lat, lon, code) {
   const weatherContainer = document.getElementById(`weather-${code}`);
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=290b1b2e0d95bbd3415fb67af86fd303`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=290b1b2e0d95bbd3415fb67af86fd303&units=metric`;
 
   fetch(weatherUrl)
     .then((response) => {
@@ -81,10 +81,7 @@ function displayWeather(countryName, capital, lat, lon, code) {
     .then((weatherData) => {
       const climate = weatherData.weather[0].main;
       const temperature = weatherData.main.temp;
-      weatherContainer.innerHTML = `<p style=""><span class="bg-primary rounded">Weather : ${climate}</span> <br/>
-       <span class="bg-success rounded"> Temperature : ${temperature}</p></span> `;
-
-      console.log(weatherContainer.style.display);
+      weatherContainer.innerHTML = `<pre><p class="p-1 bg-primary w-100" >Weather : ${climate}</p><p class="p-1 bg-success w-100" >Temperature : ${temperature} °C</p></pre> `;
     })
     .catch((error) => {
       console.error("Error fetching weather data", error);
